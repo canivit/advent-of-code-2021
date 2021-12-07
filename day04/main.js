@@ -2,15 +2,15 @@ const fs = require("fs");
 func = require('./functions');
 
 function chunkToBoard(chunk) {
-    return chunk.split('\n').map(chunkLine => {
-        return chunkLineToRow(chunkLine);
-    });
+  return chunk.split('\n').map(chunkLine => {
+    return chunkLineToRow(chunkLine);
+  });
 }
 
 function chunkLineToRow(chunkLine) {
-    return chunkLine.trim().split(/\s+/).map(n => {
-        return parseInt(n, 10);
-    });
+  return chunkLine.trim().split(/\s+/).map(n => {
+    return parseInt(n, 10);
+  });
 }
 
 const input = fs.readFileSync("input.txt", "utf-8");
