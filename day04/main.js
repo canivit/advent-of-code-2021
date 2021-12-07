@@ -1,4 +1,5 @@
 const fs = require("fs");
+func = require('./functions');
 
 function chunkToBoard(chunk) {
     return chunk.split('\n').map(chunkLine => {
@@ -8,10 +9,7 @@ function chunkToBoard(chunk) {
 
 function chunkLineToRow(chunkLine) {
     return chunkLine.trim().split(/\s+/).map(n => {
-        return {
-            value: parseInt(n, 10), 
-            marked: false
-        };
+        return parseInt(n, 10);
     });
 }
 
@@ -23,3 +21,5 @@ const boardChunks = input.substring(boardStart).split('\n\n');
 boardChunks.shift();
 boardChunks.pop();
 const boards = boardChunks.map(chunkToBoard);
+
+console.log('Part 1 Answer: ' + func.playBingo(toDraw, boards));
