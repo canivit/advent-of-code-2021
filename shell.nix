@@ -6,7 +6,4 @@ stdenv.mkDerivation {
     nodejs-16_x
     yarn
   ];
-  shellHook = ''
-    yarn add --dev jest
-  '';
 }
