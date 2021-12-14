@@ -1,6 +1,42 @@
 func = require('./functions');
 
-test('Part 1, Given Example', () => {
+test('Winning Board Test 1', () => {
+  const board = [
+    [{ marked: false }, { marked: false }, { marked: false }],
+    [{ marked: false }, { marked: false }, { marked: false }],
+    [{ marked: false }, { marked: false }, { marked: false }]];
+
+  expect(func.isBoardWinning(board)).toBe(false);
+});
+
+test('Winning Board Test 2', () => {
+  const board = [
+    [{ marked: false }, { marked: true }, { marked: false }],
+    [{ marked: false }, { marked: true }, { marked: false }],
+    [{ marked: false }, { marked: true }, { marked: false }]];
+
+  expect(func.isBoardWinning(board)).toBe(true);
+});
+
+test('Winning Board Test 3', () => {
+  const board = [
+    [{ marked: false }, { marked: false }, { marked: false }],
+    [{ marked: false }, { marked: false }, { marked: false }],
+    [{ marked: true }, { marked: true }, { marked: true }]];
+
+  expect(func.isBoardWinning(board)).toBe(true);
+});
+
+test('Winning Board Test 4', () => {
+  const board = [
+    [{ marked: true }, { marked: false }, { marked: false }],
+    [{ marked: false }, { marked: true }, { marked: false }],
+    [{ marked: true }, { marked: false }, { marked: true }]];
+
+  expect(func.isBoardWinning(board)).toBe(false);
+});
+
+test('Given Example', () => {
   const toDraw = [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24,
     10, 16, 13, 6, 15, 25, 12, 22, 18, 20, 8, 19, 3, 26, 1];
 
@@ -27,5 +63,7 @@ test('Part 1, Given Example', () => {
       [2, 0, 12, 3, 7]
     ]
   ];
-  expect(func.playBingo(toDraw, boards)).toBe(4512);
+  const scores = func.playBingo(toDraw, boards);
+  expect(scores[0]).toBe(4512);
+  expect(scores[scores.length - 1]).toBe(1924);
 });

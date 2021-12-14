@@ -1,13 +1,16 @@
 function playBingo(toDraw, boards) {
-  const convertedBoards = boards.map(convertBoard);
+  let game_boards = boards.map(convertBoard);
+  let scores = [];
   for (const chosen of toDraw) {
-    for (const board of convertedBoards) {
-      if (markBoard(board, chosen)) {
-        return boardScore(board, chosen);
+    for (const board of game_boards) {
+      markBoard(board, chosen);
+      if (isBoardWinning(board)) {
+        scores.push(boardScore(board, chosen));
       }
     }
+    game_boards = game_boards.filter(board => { return !isBoardWinning(board); });
   }
-  return 0;
+  return scores;
 }
 
 function convertBoard(board) {
@@ -39,25 +42,27 @@ function markBoard(board, chosen) {
     for (let colIdx = 0; colIdx < board[rowIdx].length; colIdx += 1) {
       if (board[rowIdx][colIdx]['value'] === chosen) {
         board[rowIdx][colIdx]['marked'] = true;
-        if (isWinningBoard(board, rowIdx, colIdx)) {
-          return true;
-        }
       }
     }
   }
-  return false;
 }
 
-function isWinningBoard(board, rowIdx, colIdx) {
-  return hasWinningRow(board, rowIdx) || hasWinningColumn(board, colIdx);
+function isBoardWinning(board) {
+  return hasWinningRow(board) || hasWinningColumn(board);
 }
 
-function hasWinningRow(board, rowIdx) {
-  return board[rowIdx].every(cell => cell['marked']);
+function hasWinningRow(board) {
+  return board.some(row => row.every(cell => cell['marked']));
 }
 
-function hasWinningColumn(board, colIdx) {
-  return board.map(row => row[colIdx]).every(cell => cell['marked']);
+function hasWinningColumn(board) {
+  const columns = [];
+  for (let colIdx = 0; colIdx < board[0].length; colIdx += 1) {
+    columns.push(board.map(row => row[colIdx]));
+  }
+  return columns.some(column => {
+    return column.every(cell => cell['marked']);
+  });
 }
 
-module.exports = { playBingo, markBoard, boardScore, convertBoard };
+module.exports = { playBingo, markBoard, boardScore, convertBoard, isBoardWinning };

@@ -22,4 +22,6 @@ boardChunks.shift();
 boardChunks.pop();
 const boards = boardChunks.map(chunkToBoard);
 
-console.log('Part 1 Answer: ' + func.playBingo(toDraw, boards));
+const scores = func.playBingo(toDraw, boards);
+console.log('Part 1 Answer: ' + scores[0]);
+console.log('Part 2 Answer: ' + scores[scores.length - 1]);
