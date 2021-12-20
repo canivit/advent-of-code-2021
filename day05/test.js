@@ -1,5 +1,3 @@
-const { pointsOnStraightLine, isHorizontalOrVertical } = require('./functions');
-
 func = require('./functions');
 
 const exampleInput = [
