@@ -1,4 +1,4 @@
-// Graph is a [Map-of String -> [Set-of String]]
+// Graph is a [Map-of String [Set-of String]]
 
 // inputToGraph: String -> Graph
 // creates a graph from the given input
@@ -26,7 +26,7 @@ function inputToGraph(input) {
   return graph;
 }
 
-// findAllPaths: Graph [String Counter -> Boolean] -> [Array-of [Array-of String]]
+// findAllPaths: Graph [String [Map-of String Natural] -> Boolean] -> [Array-of [Array-of String]]
 // find all paths from start node to end node
 // visiting neighbors is limited by the given function
 function findAllPaths(graph, isNeighborValid) {
